@@ -4,55 +4,8 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Web Programming Project</title>
-        <script>
-            async function generateText(prompt) {
-                const apiKey = "INSERT_API_KEY_HERE";
-                const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent`;
-                
-                const payload = {
-                    contents: [
-                        {
-                            parts: [
-                                {
-                                    text: prompt,
-                                },
-                            ],
-                        },
-                    ],
-                };
-
-                try {
-                    const response = await fetch(url, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'x-goog-api-key': apiKey,
-                        },
-                        body: JSON.stringify(payload)
-                    });
-
-                    if (!response.ok) {
-                        throw new Error(`HTTP error! status: ${response.status}`);
-                    }
-
-                    const data = await response.json();
-                    const text = data.candidates[0].content.parts[0].text;
-                    console.log(text);
-                    return text;
-
-                } catch (error) {
-                    console.error("Error:", error);
-                    return "Error.";
-                }
-            }
-
-            // generateText('안녕');
-        </script>
     </head>
     <body>
         <h1>Web Programming Project</h1>
-        <input type="text" id="promptInput" placeholder="Enter your prompt here">
-        <button id="generateButton">Generate</button>
-        <div id="output"></div>
     </body>
 </html>
