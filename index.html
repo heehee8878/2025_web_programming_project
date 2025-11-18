@@ -6,16 +6,23 @@
         <title>Web Programming Project</title>
 
         <link rel="stylesheet" href="./styles/main.css" />
+        <link rel="stylesheet" href="./styles/sheet.css" />
 
         <script src="./data/sample_sheet.js"></script>
         <script src="./scripts/main.js"></script>
     </head>
     <body>
-        <h1>악보 데이터 시각화</h1>
-        <div class="sheet-wrap">
-            <div class="staff-row" id="sheet"></div>
+        <div class="container">
+            <h1>악보 데이터 시각화</h1>
             <div class="title" id="meta"></div>
+            <div class="sheet-wrap">
+                <div class="staff-row" id="sheet"></div>
+            </div>
+            <div class="prompt-area">
+                <textarea class="prompt-input" placeholder="음악을 잘 설명할 수 있는 분위기 및 제목을 입력해주세요.."></textarea>
+            </div>
         </div>
+
         <div id="noteTip" class="note-tip"></div>
     </body>
 </html>
