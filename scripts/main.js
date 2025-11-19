@@ -40,5 +40,17 @@ window.onload = () => {
         }
     });
 
+    // Speed controller change
+    const speedController = document.querySelector('.speed-controller');
+    speedController.addEventListener('input', (event) => {
+        const speedValue = event.target.value;
+        const max = event.target.max;
+        const min = event.target.min;
+
+        const percentage = ((speedValue - min) / (max - min)) * 100;
+
+        speedController.style.setProperty('--filled-percentage', `${percentage}%`);
+    });
+
     //#endregion
 };

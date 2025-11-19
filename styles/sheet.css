@@ -3,7 +3,7 @@
 	--staff-spacing: 10px;
 	--line-color: #e6e6e6;
 	--note-black: #e6e6e6;
-	--note-white: #111;
+	--note-white: transparent;
 	--bar-width: 220px;
 	--bar-padding: 10px;
 	--note-head-w: 13px;
@@ -54,8 +54,8 @@
     border-radius: 50%;
     box-sizing: border-box;
 }
-.dur-1-1{ background:var(--note-white); border:2px solid var(--note-black) }
-.dur-1-2{ background:var(--note-white); border:2px solid var(--note-black) }
+.dur-1-1{ background:var(--note-white); border:1.9px solid var(--note-black) }
+.dur-1-2{ background:var(--note-white); border:1.9px solid var(--note-black) }
 .dur-1-4,.dur-1-8{ background:var(--note-black) }
 
 /* 수정된 부분: stem-up, stem-down 구분 */

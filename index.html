@@ -18,6 +18,21 @@
             <div class="sheet-wrap">
                 <div class="staff-row" id="sheet"></div>
             </div>
+            <div class="controller-area">
+                <div class="speed-controller-area">
+                    <span class="controller-label">Speed</span>
+                    <input type="range" class="speed-controller" min="0" max="2" step="0.1" value="1" />
+                </div>
+                <div class="status-controller-area">
+                    <button class="status-button">
+                        <img src="./resources/imgs/start_button.svg" alt="Start" />
+                    </button>
+                    <div class="seperator"></div>
+                    <button class="status-button">
+                        <img src="./resources/imgs/stop_button.svg" alt="Stop" />
+                    </button>
+                </div>
+            </div>
             <div class="prompt-area">
                 <textarea class="prompt-input" placeholder="음악을 잘 설명할 수 있는 분위기 및 제목을 입력해주세요.."></textarea>
                 <button class="prompt-enter-button">
