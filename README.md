@@ -36,9 +36,9 @@
 
 ### 3️. Gemini API 연동
 
-**목표:** 사용자 입력 → Gemini API 요청 → 멜로디 데이터 수신  
+**목표:** 사용자 입력 → Cerebras Cloud API 요청 → 멜로디 데이터 수신
 **주요 작업:**
-- Gemini API 키 설정 및 요청 함수 구현
+- Cerebras Cloud API(model: gpt-oss-120b) 키 설정 및 요청 함수 구현
 - 요청 전/후 상태 표시 (`"생성 중..."`, `"완료"` 등)
 - 오류 처리 및 사용자 알림 구현
 ---
