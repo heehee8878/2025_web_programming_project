@@ -1,56 +1,108 @@
 // main.js
+const API_KEY = "GEMINI_API_KEY_HERE"; 
+const GEMINI_API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent`;
 
-// const sampleSheet = { ... }
-// function sheetRenderer() { ... }
+// Function to update status messages
+function updateStatus(message, type = "info") {
+  const statusElement = document.getElementById("meta");
+  statusElement.textContent = message;
+  statusElement.className = `status-message ${type}`;
+}
 
-window.onload = () => {
-    const sheet = sampleSheet.sheet;
 
-    //#region Logging Sample Data
-    
-    console.log("- Sample Sheet Data -");
-    console.log(JSON.stringify(sampleSheet, null, 2));
+async function generateMelody(prompt) {
+  const promptInput = document.querySelector(".prompt-input");
+  const promptButton = document.querySelector(".prompt-enter-button");
+  promptButton.disabled = true; // Disable button during generation
 
-    console.log("- Notes Information -");
-    for(const bar of sheet.bars) {
-        for(const note of bar.notes) {
-            console.log(`pitch: ${note.pitch}, duration: ${note.duration}`);
-        }
-        console.log('---');
+  try {
+    const response = await fetch(`${GEMINI_API_URL}?key=${API_KEY}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        contents: [
+          {
+            parts: [
+              {
+                text: `Generate a musical sheet data in JSON format based on the following description: "${prompt}". You must follow this JSON schema: {"sheet": {"title": "string", "bars": [{"notes": [{"pitch": "string", "duration": "string"}]}]}}. The "duration" value for each note MUST be a string representing a fraction, like "1/4" for a quarter note, "1/8" for an eighth note, or "1/1" for a whole note.`,
+              },
+            ],
+          },
+        ],
+        generationConfig: {
+          response_mime_type: "application/json",
+        },
+      }),
+    });
+
+    if (!response.ok) {
+      const errorBody = await response.text();
+      throw new Error(`API request failed: ${response.status} - ${errorBody}`);
     }
 
-    //#endregion
+    const data = await response.json();
 
-    // Render sheet
-    sheetRendering(sheet);
+    const responseText = data.candidates[0].content.parts[0].text;
+    const melodyData = JSON.parse(responseText);
 
-    // Update sheet title
-    document.getElementById('meta').textContent = `제목: ${sheet.title} (${sheet.bars.length} 마디)`;
+    return melodyData;
+  } catch (error) {
+    console.error("Error generating melody:", error);
+    updateStatus(`오류 발생: ${error.message}`, "error");
+    document.getElementById("meta").textContent = ""; 
+    return null;
+  } finally {
+    promptButton.disabled = false; // Re-enable button
+  }
+}
 
-    //#region Event Listeners
 
-    // Prompt enter button click
-    const promptInput = document.querySelector('.prompt-input');
-    const promptButton = document.querySelector('.prompt-enter-button');
-    promptButton.addEventListener('click', () => {
-        const prompt = promptInput.value.trim();
-        if(prompt.length > 0) {
-            alert(prompt);
-            promptInput.value = '';
+
+window.onload = () => {
+  updateStatus("프롬프트를 입력하여 멜로디를 생성하세요.", "info");
+
+  //#region Event Listeners
+
+  // Prompt enter button click
+  const promptInput = document.querySelector(".prompt-input");
+  const promptButton = document.querySelector(".prompt-enter-button");
+
+  promptButton.addEventListener("click", async () => {
+    const prompt = promptInput.value.trim();
+
+    if (prompt.length > 0) {
+      updateStatus("생성 중...", "info"); 
+      const melody = await generateMelody(prompt);
+      
+      if (melody && melody.sheet) {
+          updateStatus("완료!", "success");
+          
+          const sheetContainer = document.getElementById("sheet");
+          if (sheetContainer) {
+              sheetContainer.innerHTML = ""; 
+            }
+            sheetRendering(melody.sheet);
+            setTimeout(() => { updateStatus(`제목: ${melody.sheet.title} (${melody.sheet.bars.length} 마디)`, "title"); }, 1000);
         }
-    });
+        promptInput.value = "";
+    } else {
+      updateStatus("프롬프트를 입력해주세요.", "warning");
+    }
+  });
 
-    // Speed controller change
-    const speedController = document.querySelector('.speed-controller');
-    speedController.addEventListener('input', (event) => {
-        const speedValue = event.target.value;
-        const max = event.target.max;
-        const min = event.target.min;
+  // Speed controller change
+  const speedController = document.querySelector(".speed-controller");
+  speedController.addEventListener("input", (event) => {
+    const speedValue = event.target.value;
+    const max = event.target.max;
+    const min = event.target.min;
 
-        const percentage = ((speedValue - min) / (max - min)) * 100;
+    const percentage = ((speedValue - min) / (max - min)) * 100;
 
-        speedController.style.setProperty('--filled-percentage', `${percentage}%`);
-    });
+    speedController.style.setProperty("--filled-percentage", `${percentage}%`);
+  });
 
-    //#endregion
+  //#endregion
 };

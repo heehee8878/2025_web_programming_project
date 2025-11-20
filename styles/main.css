@@ -242,3 +242,38 @@ h1 {
     height: 22px;
     opacity: 0.7;
 }
+
+/* Status Message */
+.status-message {
+    font-family: 'Freesentation Variable', sans-serif; /* Use same font as title */
+    font-size: 14px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    min-height: 20px;
+    transition: color 0.3s ease;
+}
+
+.status-message.info {
+    color: #a0a0a0;
+    text-align: center;
+}
+
+.status-message.success {
+    color: white; 
+    text-align: center;
+}
+
+.status-message.title {
+    color: white;
+    !text-align: left;
+}
+
+.status-message.error {
+    color: #F44336; /* Red for error */
+    text-align: center;
+}
+
+.status-message.warning {
+    color: #FFC107; /* Amber for warning */
+    text-align: center;
+}
