@@ -1,6 +1,5 @@
 // main.js
-const API_KEY = GEMINI_API_KEY;
-const GEMINI_API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent`;
+const API_URL = `https://api.cerebras.ai/v1/chat/completions`;
 
 // Function to update status messages
 function updateStatus(message, type = "info") {
@@ -8,57 +7,6 @@ function updateStatus(message, type = "info") {
   statusElement.textContent = message;
   statusElement.className = `status-message ${type}`;
 }
-
-
-async function generateMelody(prompt) {
-  const promptInput = document.querySelector(".prompt-input");
-  const promptButton = document.querySelector(".prompt-enter-button");
-  promptButton.disabled = true; // Disable button during generation
-
-  try {
-    const response = await fetch(`${GEMINI_API_URL}?key=${API_KEY}`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        contents: [
-          {
-            parts: [
-              {
-                text: `Generate a musical sheet data in JSON format based on the following description: "${prompt}". You must follow this JSON schema: {"sheet": {"title": "string", "bars": [{"notes": [{"pitch": "string", "duration": "string"}]}]}}. The "duration" value for each note MUST be a string representing a fraction, like "1/4" for a quarter note, "1/8" for an eighth note, or "1/1" for a whole note.`,
-              },
-            ],
-          },
-        ],
-        generationConfig: {
-          response_mime_type: "application/json",
-        },
-      }),
-    });
-
-    if (!response.ok) {
-      const errorBody = await response.text();
-      throw new Error(`API request failed: ${response.status} - ${errorBody}`);
-    }
-
-    const data = await response.json();
-
-    const responseText = data.candidates[0].content.parts[0].text;
-    const melodyData = JSON.parse(responseText);
-
-    return melodyData;
-  } catch (error) {
-    console.error("Error generating melody:", error);
-    updateStatus(`오류 발생: ${error.message}`, "error");
-    document.getElementById("meta").textContent = "";
-    return null;
-  } finally {
-    promptButton.disabled = false; // Re-enable button
-  }
-}
-
-
 
 window.onload = () => {
   updateStatus("프롬프트를 입력하여 멜로디를 생성하세요.", "info");
@@ -75,7 +23,11 @@ window.onload = () => {
 
     if (prompt.length > 0) {
       updateStatus("생성 중...", "info");
+
+      promptButton.disabled = true;
       melody = await generateMelody(prompt);
+      promptButton.disabled = false;
+
       melodyStore.addMelody(prompt, melody);
       if (melody && melody.sheet) {
         updateStatus("완료!", "success");
