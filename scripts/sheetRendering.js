@@ -54,4 +54,26 @@ function sheetRendering(sheet) {
         });
         container.appendChild(barEl);
     });
+
+    function adjustScale() {
+        const wrap = document.querySelector('.sheet-wrap');
+        const sheetEl = document.getElementById('sheet');
+        if (!wrap || !sheetEl) return;
+
+        const availableWidth = wrap.clientWidth - 100; // 100px padding
+        const contentWidth = sheetEl.scrollWidth;
+
+        if (contentWidth > availableWidth) {
+            const scale = availableWidth / contentWidth;
+            sheetEl.style.transform = `scale(${scale})`;
+        } else {
+            sheetEl.style.transform = 'scale(1)';
+        }
+    }
+
+    // Initial adjustment
+    adjustScale();
+
+    // Adjust on resize
+    window.addEventListener('resize', adjustScale);
 }
