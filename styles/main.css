@@ -277,3 +277,13 @@ h1 {
     color: #FFC107; /* Amber for warning */
     text-align: center;
 }
+
+.melody-item{
+    cursor: pointer;
+    padding: 8px 12px;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    color: #e6e6e6;
+    background-color: rgba(255, 255, 255, 0.05);
+    transition: background-color 0.2s;
+}
