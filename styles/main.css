@@ -265,7 +265,7 @@ h1 {
 
 .status-message.title {
     color: white;
-    !text-align: left;
+    text-align: left;
 }
 
 .status-message.error {

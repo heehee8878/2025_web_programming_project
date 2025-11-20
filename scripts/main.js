@@ -1,5 +1,5 @@
 // main.js
-const API_KEY = GEMINI_API_KEY; 
+const API_KEY = GEMINI_API_KEY;
 const GEMINI_API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent`;
 
 // Function to update status messages
@@ -51,7 +51,7 @@ async function generateMelody(prompt) {
   } catch (error) {
     console.error("Error generating melody:", error);
     updateStatus(`오류 발생: ${error.message}`, "error");
-    document.getElementById("meta").textContent = ""; 
+    document.getElementById("meta").textContent = "";
     return null;
   } finally {
     promptButton.disabled = false; // Re-enable button
@@ -62,6 +62,7 @@ async function generateMelody(prompt) {
 
 window.onload = () => {
   updateStatus("프롬프트를 입력하여 멜로디를 생성하세요.", "info");
+  let melody;
 
   //#region Event Listeners
 
@@ -73,20 +74,20 @@ window.onload = () => {
     const prompt = promptInput.value.trim();
 
     if (prompt.length > 0) {
-      updateStatus("생성 중...", "info"); 
-      const melody = await generateMelody(prompt);
-      
+      updateStatus("생성 중...", "info");
+      melody = await generateMelody(prompt);
+      melodyStore.addMelody(prompt, melody);
       if (melody && melody.sheet) {
-          updateStatus("완료!", "success");
-          
-          const sheetContainer = document.getElementById("sheet");
-          if (sheetContainer) {
-              sheetContainer.innerHTML = ""; 
-            }
-            sheetRendering(melody.sheet);
-            setTimeout(() => { updateStatus(`제목: ${melody.sheet.title} (${melody.sheet.bars.length} 마디)`, "title"); }, 1000);
+        updateStatus("완료!", "success");
+
+        const sheetContainer = document.getElementById("sheet");
+        if (sheetContainer) {
+          sheetContainer.innerHTML = "";
         }
-        promptInput.value = "";
+        sheetRendering(melody.sheet);
+        setTimeout(() => { updateStatus(`제목: ${melody.sheet.title} (${melody.sheet.bars.length} 마디)`, "title"); }, 1000);
+      }
+      promptInput.value = "";
     } else {
       updateStatus("프롬프트를 입력해주세요.", "warning");
     }
@@ -102,6 +103,28 @@ window.onload = () => {
     const percentage = ((speedValue - min) / (max - min)) * 100;
 
     speedController.style.setProperty("--filled-percentage", `${percentage}%`);
+  });
+
+  // play Note
+  const playButton = document.querySelector(".status-button");
+  playButton.addEventListener('click', async function (e) {
+    if(!melody || !melody.sheet) alert("먼저 멜로디를 생성해주세요!");
+    for (const bar of melody.sheet.bars) {
+      for (const note of bar.notes) {
+        const durationNotation = note.duration[2] + 'n';
+        
+        await playNote(note.pitch, durationNotation);
+        
+        // 재생 속도 조절
+        const speedValue = speedController.value;
+        const speedFactor = speedValue / 100;
+        
+        if (speedFactor < 1) {
+          const additionalDelay = Tone.Time(durationNotation).toSeconds() * (1 - speedFactor);
+          await new Promise(resolve => setTimeout(resolve, additionalDelay * 1000));
+        }
+      }
+    }
   });
 
   //#endregion
