@@ -8,9 +8,12 @@ function updateStatus(message, type = "info") {
   statusElement.className = `status-message ${type}`;
 }
 
+let melody;
+
 window.onload = () => {
   updateStatus("프롬프트를 입력하여 멜로디를 생성하세요.", "info");
-  let melody;
+  let isPlaying = false;
+  let shouldStop = false;
 
   //#region Event Listeners
 
@@ -58,14 +61,28 @@ window.onload = () => {
   });
 
   // play Note
-  const playButton = document.querySelector(".status-button");
+  const playButton = document.querySelectorAll(".status-button")[0];
   playButton.addEventListener('click', async function (e) {
-    if(!melody || !melody.sheet) alert("먼저 멜로디를 생성해주세요!");
+    if(!melody || !melody.sheet) {
+      alert("먼저 멜로디를 생성해주세요!");
+      return;
+    }
+    
+    if(isPlaying) return;
+    
+    isPlaying = true;
+    shouldStop = false;
+    
+    outerLoop:
     for (const bar of melody.sheet.bars) {
       for (const note of bar.notes) {
+        if(shouldStop) break outerLoop;
+        
         const durationNotation = note.duration[2] + 'n';
         
         await playNote(note.pitch, durationNotation);
+        
+        if(shouldStop) break outerLoop;
         
         // 재생 속도 조절
         const speedValue = speedController.value;
@@ -77,6 +94,18 @@ window.onload = () => {
         }
       }
     }
+    
+    isPlaying = false;
+  });
+
+  // Stop Note
+  const stopButton = document.querySelectorAll(".status-button")[1];
+  stopButton.addEventListener('click', function (e) {
+    shouldStop = true;
+    piano.releaseAll();
+    Tone.Transport.stop();
+    Tone.Transport.cancel();
+    isPlaying = false;
   });
 
   //#endregion
