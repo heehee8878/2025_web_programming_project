@@ -72,6 +72,21 @@ document.addEventListener("DOMContentLoaded", () => {
       const melodyItem = document.createElement("div");
       melodyItem.className = "melody-item";
       melodyItem.textContent = melody.title;
+      melodyItem.addEventListener("click", () => {
+        melodyStoreSideBar.classList.remove("open");
+        toggleStore = false;
+        
+        melodyData = melody.notes;
+        
+        // 기존 악보 초기화
+        const sheetContainer = document.querySelector('.sheet-container') || document.querySelector('#sheet');
+        if (sheetContainer) {
+          sheetContainer.innerHTML = '';
+        }
+        
+        sheetRendering(melody.notes.sheet);
+        updateStatus(`Loaded melody: ${melody.title}`, "success");
+      });
 
       const deletebutton = document.createElement("button");
       deletebutton.textContent = "X";

@@ -8,7 +8,7 @@ function updateStatus(message, type = "info") {
   statusElement.className = `status-message ${type}`;
 }
 
-let melody;
+let melodyData = null;
 
 window.onload = () => {
   updateStatus("프롬프트를 입력하여 멜로디를 생성하세요.", "info");
@@ -28,19 +28,19 @@ window.onload = () => {
       updateStatus("생성 중...", "info");
 
       promptButton.disabled = true;
-      melody = await generateMelody(prompt);
+      melodyData = await generateMelody(prompt);
       promptButton.disabled = false;
 
-      melodyStore.addMelody(prompt, melody);
-      if (melody && melody.sheet) {
+      melodyStore.addMelody(prompt, melodyData);
+      if (melodyData && melodyData.sheet) {
         updateStatus("완료!", "success");
 
         const sheetContainer = document.getElementById("sheet");
         if (sheetContainer) {
           sheetContainer.innerHTML = "";
         }
-        sheetRendering(melody.sheet);
-        setTimeout(() => { updateStatus(`제목: ${melody.sheet.title} (${melody.sheet.bars.length} 마디)`, "title"); }, 1000);
+        sheetRendering(melodyData.sheet);
+        setTimeout(() => { updateStatus(`제목: ${melodyData.sheet.title} (${melodyData.sheet.bars.length} 마디)`, "title"); }, 1000);
       }
       promptInput.value = "";
     } else {
@@ -63,7 +63,7 @@ window.onload = () => {
   // play Note
   const playButton = document.querySelectorAll(".status-button")[0];
   playButton.addEventListener('click', async function (e) {
-    if(!melody || !melody.sheet) {
+    if(!melodyData || !melodyData.sheet) {
       alert("먼저 멜로디를 생성해주세요!");
       return;
     }
@@ -74,7 +74,7 @@ window.onload = () => {
     shouldStop = false;
     
     outerLoop:
-    for (const bar of melody.sheet.bars) {
+    for (const bar of melodyData.sheet.bars) {
       for (const note of bar.notes) {
         if(shouldStop) break outerLoop;
         
