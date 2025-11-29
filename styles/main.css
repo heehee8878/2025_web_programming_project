@@ -287,3 +287,59 @@ h1 {
     background-color: rgba(255, 255, 255, 0.05);
     transition: background-color 0.2s;
 }
+
+
+/* Sidebar */
+.sidebar {
+    top: 0;
+    left: 0;
+    position: fixed;
+    opacity: 0.7;
+}
+.sidebar img {
+    width: 20px;
+    padding: 15px;
+}
+
+.open {
+    width: 200px;
+    height: 100%;
+    opacity: 1;
+    background-color: #1b1b20;
+}
+
+.store-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.melody-item {
+    background-color: #1b1b20;
+    border-top: 1px solid #575764;
+    border-radius: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 10px;
+    font-size: 10pt;
+}
+
+.melody-item:hover {
+    background-color: #2f2f3a;
+}
+
+.melody-item span {
+    flex: 1;
+}
+
+.delete-button {
+    background: none;
+    outline: none;
+    border: none;
+    color: white;
+    opacity: 0.6;
+    font-weight: 100;
+    font-size: 8pt;
+    transform: scaleY(0.8);
+}

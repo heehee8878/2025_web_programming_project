@@ -71,9 +71,17 @@ document.addEventListener("DOMContentLoaded", () => {
     melodies.forEach((melody) => {
       const melodyItem = document.createElement("div");
       melodyItem.className = "melody-item";
-      melodyItem.textContent = melody.title;
+      const melodyTitle = document.createElement("span");
+      melodyTitle.textContent = melody.title;
+      melodyItem.appendChild(melodyTitle);
       melodyItem.addEventListener("click", () => {
         melodyStoreSideBar.classList.remove("open");
+        const existingContent =
+        melodyStoreSideBar.querySelector(".store-content");
+        if (existingContent) {
+          // Delay removal to allow for closing animation
+          setTimeout(() => existingContent.remove(), 0);
+        }
         toggleStore = false;
         
         melodyData = melody.notes;
@@ -94,7 +102,7 @@ document.addEventListener("DOMContentLoaded", () => {
       deletebutton.addEventListener("click", (e) => {
          e.stopPropagation();
          const confirmed = confirm(
-             `Are you sure you want to delete the melody: "${melody.title}"?`
+             `정말로 "${melody.title}" 멜로디를 삭제하시겠습니까?`
          );
          if (confirmed) {
            melodyStore.removeMelody(melody.id);
@@ -117,15 +125,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
     toggleStore = !toggleStore;
     if (toggleStore) {
-      melodyStoreSideBar.classList.add("open");
       renderMelodyStore();
+      melodyStoreSideBar.classList.add("open");
     } else {
       melodyStoreSideBar.classList.remove("open");
       const existingContent =
         melodyStoreSideBar.querySelector(".store-content");
       if (existingContent) {
         // Delay removal to allow for closing animation
-        setTimeout(() => existingContent.remove(), 350);
+        setTimeout(() => existingContent.remove(), 0);
       }
     }
   });
