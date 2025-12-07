@@ -10,8 +10,20 @@ function updateStatus(message, type = "info") {
 
 let melodyData = null;
 
+function checkHasApiKey() {
+  if (!API_KEY || API_KEY.trim() === "") {
+    updateStatus("API 키가 설정되지 않았습니다.", "error");
+
+    const apiInputPanel = document.querySelector(".apiinput-panel-wrapper");
+    apiInputPanel.style.display = "flex";
+  }
+}
+
 window.onload = () => {
   updateStatus("프롬프트를 입력하여 멜로디를 생성하세요.", "info");
+  
+  checkHasApiKey();
+  
   let isPlaying = false;
   let shouldStop = false;
 
@@ -106,6 +118,20 @@ window.onload = () => {
     Tone.Transport.stop();
     Tone.Transport.cancel();
     isPlaying = false;
+  });
+
+  const apiInput = document.querySelector(".apiinput");
+  const apiButton = document.querySelector(".apiinput-button");
+  apiButton.addEventListener("click", () => {
+    const apiKey = apiInput.value.trim();
+    if (apiKey.length > 0) {
+      API_KEY = apiKey;
+      const apiInputPanel = document.querySelector(".apiinput-panel-wrapper");
+      apiInputPanel.style.display = "none";
+      updateStatus("API 키가 설정되었습니다. 프롬프트를 입력하여 멜로디를 생성하세요.", "info");
+    } else {
+      alert("API 키를 입력해주세요.");
+    }
   });
 
   //#endregion

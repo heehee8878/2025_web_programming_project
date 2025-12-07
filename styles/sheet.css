@@ -168,49 +168,109 @@
 }
 
 /* 음표 위치 지정 */
-.p-C4 {
-	top: calc(100% + var(--staff-spacing) * 1)
-}
+.p-C1 { top: calc(100% + var(--staff-spacing) * 13) }
+.p-Cs1, .p-Db1 { top: calc(100% + var(--staff-spacing) * 12.75) }
+.p-D1 { top: calc(100% + var(--staff-spacing) * 12.5) }
+.p-Ds1, .p-Eb1 { top: calc(100% + var(--staff-spacing) * 12.25) }
+.p-E1 { top: calc(100% + var(--staff-spacing) * 12) }
+.p-F1 { top: calc(100% + var(--staff-spacing) * 11.75) }
+.p-Fs1, .p-Gb1 { top: calc(100% + var(--staff-spacing) * 11.5) }
+.p-G1 { top: calc(100% + var(--staff-spacing) * 11.25) }
+.p-Gs1, .p-Ab1 { top: calc(100% + var(--staff-spacing) * 11) }
+.p-A1 { top: calc(100% + var(--staff-spacing) * 10.75) }
+.p-As1, .p-Bb1 { top: calc(100% + var(--staff-spacing) * 10.5) }
+.p-B1 { top: calc(100% + var(--staff-spacing) * 10.25) }
 
-.p-D4 {
-	top: calc(100% + var(--staff-spacing) * 0.5)
-}
+.p-C2 { top: calc(100% + var(--staff-spacing) * 9) }
+.p-Cs2, .p-Db2 { top: calc(100% + var(--staff-spacing) * 8.75) }
+.p-D2 { top: calc(100% + var(--staff-spacing) * 8.5) }
+.p-Ds2, .p-Eb2 { top: calc(100% + var(--staff-spacing) * 8.25) }
+.p-E2 { top: calc(100% + var(--staff-spacing) * 8) }
+.p-F2 { top: calc(100% + var(--staff-spacing) * 7.75) }
+.p-Fs2, .p-Gb2 { top: calc(100% + var(--staff-spacing) * 7.5) }
+.p-G2 { top: calc(100% + var(--staff-spacing) * 7.25) }
+.p-Gs2, .p-Ab2 { top: calc(100% + var(--staff-spacing) * 7) }
+.p-A2 { top: calc(100% + var(--staff-spacing) * 6.75) }
+.p-As2, .p-Bb2 { top: calc(100% + var(--staff-spacing) * 6.5) }
+.p-B2 { top: calc(100% + var(--staff-spacing) * 6.25) }
 
-.p-E4 {
-	top: 100%
-}
+.p-C3 { top: calc(100% + var(--staff-spacing) * 5) }
+.p-Cs3, .p-Db3 { top: calc(100% + var(--staff-spacing) * 4.75) }
+.p-D3 { top: calc(100% + var(--staff-spacing) * 4.5) }
+.p-Ds3, .p-Eb3 { top: calc(100% + var(--staff-spacing) * 4.25) }
+.p-E3 { top: calc(100% + var(--staff-spacing) * 4) }
+.p-F3 { top: calc(100% + var(--staff-spacing) * 3.75) }
+.p-Fs3, .p-Gb3 { top: calc(100% + var(--staff-spacing) * 3.5) }
+.p-G3 { top: calc(100% + var(--staff-spacing) * 3.25) }
+.p-Gs3, .p-Ab3 { top: calc(100% + var(--staff-spacing) * 3) }
+.p-A3 { top: calc(100% + var(--staff-spacing) * 2.75) }
+.p-As3, .p-Bb3 { top: calc(100% + var(--staff-spacing) * 2.5) }
+.p-B3 { top: calc(100% + var(--staff-spacing) * 2.25) }
 
-.p-F4 {
-	top: calc(100% - var(--staff-spacing) * 0.5)
-}
+.p-C4 { top: calc(100% + var(--staff-spacing) * 1) }
+.p-Cs4, .p-Db4 { top: calc(100% + var(--staff-spacing) * 0.75) }
+.p-D4 { top: calc(100% + var(--staff-spacing) * 0.5) }
+.p-Ds4, .p-Eb4 { top: calc(100% + var(--staff-spacing) * 0.25) }
+.p-E4 { top: 100% }
+.p-F4 { top: calc(100% - var(--staff-spacing) * 0.25) }
+.p-Fs4, .p-Gb4 { top: calc(100% - var(--staff-spacing) * 0.5) }
+.p-G4 { top: calc(100% - var(--staff-spacing) * 0.75) }
+.p-Gs4, .p-Ab4 { top: calc(100% - var(--staff-spacing) * 1) }
+.p-A4 { top: calc(100% - var(--staff-spacing) * 1.25) }
+.p-As4, .p-Bb4 { top: calc(100% - var(--staff-spacing) * 1.5) }
+.p-B4 { top: calc(100% - var(--staff-spacing) * 1.75) }
 
-.p-G4 {
-	top: calc(100% - var(--staff-spacing) * 1)
-}
+.p-C5 { top: calc(100% - var(--staff-spacing) * 2) }
+.p-Cs5, .p-Db5 { top: calc(100% - var(--staff-spacing) * 2.25) }
+.p-D5 { top: calc(100% - var(--staff-spacing) * 2.5) }
+.p-Ds5, .p-Eb5 { top: calc(100% - var(--staff-spacing) * 2.75) }
+.p-E5 { top: calc(100% - var(--staff-spacing) * 3) }
+.p-F5 { top: calc(100% - var(--staff-spacing) * 3.25) }
+.p-Fs5, .p-Gb5 { top: calc(100% - var(--staff-spacing) * 3.5) }
+.p-G5 { top: calc(100% - var(--staff-spacing) * 3.75) }
+.p-Gs5, .p-Ab5 { top: calc(100% - var(--staff-spacing) * 4) }
+.p-A5 { top: calc(100% - var(--staff-spacing) * 4.25) }
+.p-As5, .p-Bb5 { top: calc(100% - var(--staff-spacing) * 4.5) }
+.p-B5 { top: calc(100% - var(--staff-spacing) * 4.75) }
 
-.p-A4 {
-	top: calc(100% - var(--staff-spacing) * 1.5)
-}
+.p-C6 { top: calc(100% - var(--staff-spacing) * 5) }
+.p-Cs6, .p-Db6 { top: calc(100% - var(--staff-spacing) * 5.25) }
+.p-D6 { top: calc(100% - var(--staff-spacing) * 5.5) }
+.p-Ds6, .p-Eb6 { top: calc(100% - var(--staff-spacing) * 5.75) }
+.p-E6 { top: calc(100% - var(--staff-spacing) * 6) }
+.p-F6 { top: calc(100% - var(--staff-spacing) * 6.25) }
+.p-Fs6, .p-Gb6 { top: calc(100% - var(--staff-spacing) * 6.5) }
+.p-G6 { top: calc(100% - var(--staff-spacing) * 6.75) }
+.p-Gs6, .p-Ab6 { top: calc(100% - var(--staff-spacing) * 7) }
+.p-A6 { top: calc(100% - var(--staff-spacing) * 7.25) }
+.p-As6, .p-Bb6 { top: calc(100% - var(--staff-spacing) * 7.5) }
+.p-B6 { top: calc(100% - var(--staff-spacing) * 7.75) }
 
-.p-B4 {
-	top: calc(100% - var(--staff-spacing) * 2)
-}
+.p-C7 { top: calc(100% - var(--staff-spacing) * 8) }
+.p-Cs7, .p-Db7 { top: calc(100% - var(--staff-spacing) * 8.25) }
+.p-D7 { top: calc(100% - var(--staff-spacing) * 8.5) }
+.p-Ds7, .p-Eb7 { top: calc(100% - var(--staff-spacing) * 8.75) }
+.p-E7 { top: calc(100% - var(--staff-spacing) * 9) }
+.p-F7 { top: calc(100% - var(--staff-spacing) * 9.25) }
+.p-Fs7, .p-Gb7 { top: calc(100% - var(--staff-spacing) * 9.5) }
+.p-G7 { top: calc(100% - var(--staff-spacing) * 9.75) }
+.p-Gs7, .p-Ab7 { top: calc(100% - var(--staff-spacing) * 10) }
+.p-A7 { top: calc(100% - var(--staff-spacing) * 10.25) }
+.p-As7, .p-Bb7 { top: calc(100% - var(--staff-spacing) * 10.5) }
+.p-B7 { top: calc(100% - var(--staff-spacing) * 10.75) }
 
-.p-C5 {
-	top: calc(100% - var(--staff-spacing) * 2.5)
-}
-
-.p-D5 {
-	top: calc(100% - var(--staff-spacing) * 3)
-}
-
-.p-E5 {
-	top: calc(100% - var(--staff-spacing) * 3.5)
-}
-
-.p-F5 {
-	top: calc(100% - var(--staff-spacing) * 4)
-}
+.p-C8 { top: calc(100% - var(--staff-spacing) * 11) }
+.p-Cs8, .p-Db8 { top: calc(100% - var(--staff-spacing) * 11.25) }
+.p-D8 { top: calc(100% - var(--staff-spacing) * 11.5) }
+.p-Ds8, .p-Eb8 { top: calc(100% - var(--staff-spacing) * 11.75) }
+.p-E8 { top: calc(100% - var(--staff-spacing) * 12) }
+.p-F8 { top: calc(100% - var(--staff-spacing) * 12.25) }
+.p-Fs8, .p-Gb8 { top: calc(100% - var(--staff-spacing) * 12.5) }
+.p-G8 { top: calc(100% - var(--staff-spacing) * 12.75) }
+.p-Gs8, .p-Ab8 { top: calc(100% - var(--staff-spacing) * 13) }
+.p-A8 { top: calc(100% - var(--staff-spacing) * 13.25) }
+.p-As8, .p-Bb8 { top: calc(100% - var(--staff-spacing) * 13.5) }
+.p-B8 { top: calc(100% - var(--staff-spacing) * 13.75) }
 
 .bar-label {
 	position: absolute;

@@ -39,7 +39,7 @@ function sheetRendering(sheet) {
             const leftPos = cursor + w / 2;
 
             const note = document.createElement('span');
-            const pitchClass = 'p-' + n.pitch.replace('#', 's').replace(/\+/g, '').replace(/\./g, '');
+            const pitchClass = 'p-' + n.pitch.replace('#', 's').replace('b', 'b').replace(/\+/g, '').replace(/\./g, '');
 
             note.className = `note ${pitchClass} ${durClass(n.duration)}`;
             note.classList.add(stemDirection(n.pitch) === 'up' ? 'stem-up' : 'stem-down');
