@@ -11,7 +11,15 @@ function updateStatus(message, type = "info") {
 let melodyData = null;
 
 function checkHasApiKey() {
-  if (!API_KEY || API_KEY.trim() === "") {
+  try {
+    const tmp = API_KEY;
+    if (!tmp || tmp.trim() === "") {
+      updateStatus("API 키가 설정되지 않았습니다.", "error");
+
+      const apiInputPanel = document.querySelector(".apiinput-panel-wrapper");
+      apiInputPanel.style.display = "flex";
+    }
+  } catch (e) {
     updateStatus("API 키가 설정되지 않았습니다.", "error");
 
     const apiInputPanel = document.querySelector(".apiinput-panel-wrapper");
