@@ -1,11 +1,63 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Web Programming Project</title>
-    </head>
-    <body>
-        <h1>Web Programming Project</h1>
-    </body>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Programming Project</title>
+
+    <link rel="stylesheet" href="./styles/main.css" />
+    <link rel="stylesheet" href="./styles/sheet.css" />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script>
+
+    <script src="./scripts/generateMelody.js"></script>
+    <script src="./scripts/playNote.js"></script>
+    <script src="./scripts/sheetRendering.js"></script>
+    <script src="./scripts/env.js"></script>
+    <script src="./scripts/main.js"></script>
+    <script src="./scripts/melodyStore.js"></script>
+</head>
+
+<body>
+    <div class="apiinput-panel-wrapper">
+        <div class="apiinput-panel">
+            <input type="text" class="apiinput" placeholder="API 키를 입력해주세요" />
+            <button class="apiinput-button">확인</button>
+        </div>
+    </div>
+    <div class="sidebar" id="store"><img src="./resources/imgs/menu.svg" alt="menu"></div>
+    <div class="container">
+        <div class="main-content">
+            <div class="title" id="meta"></div>
+            <div class="sheet-wrap">
+                <div class="staff-row" id="sheet"></div>
+            </div>
+            <div class="controller-area">
+                <div class="speed-controller-area">
+                    <span class="controller-label">Speed</span>
+                    <input type="range" class="speed-controller" min="0" max="100" step="1" value="50" />
+                </div>
+                <div class="status-controller-area">
+                    <button class="status-button">
+                        <img src="./resources/imgs/start_button.svg" alt="Start" />
+                    </button>
+                    <div class="seperator"></div>
+                    <button class="status-button">
+                        <img src="./resources/imgs/stop_button.svg" alt="Stop" />
+                    </button>
+                </div>
+            </div>
+            <div class="prompt-area">
+                <textarea class="prompt-input" placeholder="음악을 잘 설명할 수 있는 분위기 및 제목을 입력해주세요.."></textarea>
+                <button class="prompt-enter-button">
+                    <img src="./resources/imgs/arrow_forward.svg" alt="Forward Arrow" />
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="noteTip" class="note-tip"></div>
+</body>
+
 </html>
